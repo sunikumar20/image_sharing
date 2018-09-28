@@ -1,0 +1,44 @@
+= javascript_include_tag "admin/jQuery-2.1.4.min", "admin/bootstrap.min", "admin/jquery.dataTables.min", "admin/dataTables.bootstrap.min", "admin/fastclick.min", "admin/app.min", "admin/jquery.sparkline.min", "admin/jquery-jvectormap-1.2.2.min", "admin/jquery-jvectormap-world-mill-en", "admin/jquery.slimscroll.min", "admin/icheck.min", "admin/select2.full.min", "admin/jquery.inputmask", "admin/jquery.inputmask.date.extensions", "admin/jquery.inputmask.extensions", "admin/moment.min", "admin/daterangepicker", "admin/bootstrap-timepicker.min", "admin/bootstrap-colorpicker.min", "admin/Chart.min", "admin/demo", "admin/bootstrap3-wysihtml5.all.min", "admin/bootstrap-datetimepicker"
+
+:javascript
+  $('#reservationtime').datetimepicker();
+
+  $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
+  //Datemask2 mm/dd/yyyy
+  $("#datemask2").inputmask("mm/dd/yyyy", {"placeholder": "mm/dd/yyyy"});
+  //Money Euro
+  $("[data-mask]").inputmask();
+  $(function () {
+    $('#example1').DataTable({
+      "aaSorting": [],
+      "ordering": true
+    });
+    $('#example2').DataTable({
+      "aaSorting": [],
+      "ordering": true,
+      "searching": false,
+      "bPaginate": false,
+      "bLengthChange": false
+    });
+    $('#example3').DataTable({
+      "ordering": true,
+      "order": [[ 4, "desc" ]],
+      "searching": false,
+      "bPaginate": false,
+      "bLengthChange": false,
+      "bInfo" : false
+    });
+  });
+
+  $(".timepicker").timepicker();
+
+  function add_fields(link, association, content, partials) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g");
+    $(link).parent().before(content.replace(regexp, new_id));
+  }
+
+  function remove_fields(link) {
+    $(link).prev("input[type=hidden]").val("1");
+    $(link).closest(".fields").hide();
+  }

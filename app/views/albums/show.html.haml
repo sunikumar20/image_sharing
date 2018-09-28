@@ -1,0 +1,30 @@
+.content-wrapper
+  %section.content-header
+    %h1
+      Images
+    .breadcrumb
+      %a.btn.btn-sm.btn-primary{:href => albums_path} Back
+      
+  %section.content
+    .row
+      .col-xs-12
+        .box
+          .box-header
+          .box-body
+            %table#example2.table.table-bordered.table-striped
+              %thead
+                %tr
+                  %th Image
+                  %th TagLine
+                  %th Created Date
+              %tbody
+                - @images.each do |b|
+                  %tr
+                    %td= image_tag(b.pic.url(:small))
+                    %td= b.tagline
+                    %td= b.cdate
+              %tfoot
+                %tr
+                  %th Name
+                  %th Owner
+                  %th Created Date

@@ -1,0 +1,39 @@
+.box.box-default
+  .box-header.with-border
+    %h3.box-title Form
+    .box-tools.pull-right
+      %button.btn.btn-box-tool{"data-widget" => "collapse"}
+        %i.fa.fa-minus
+  = form_for @album do |f|
+    .box-body
+      - if @album.errors.present? and @album.errors.messages[:images].present?
+        .row
+          %p{style: "color: red;text-align: center;font-size: 20px;"} Maximum 25 imges allowed to upload.
+      .row
+        .col-md-6
+          .form-group
+            %label
+              Name
+            = f.text_field :name, :class => "form-control",:placeholder => "Enter Name", required: "required"
+      .row
+        .product_size_div Add Images:
+        .clear
+        .form_group.cf.mbot_20
+          = f.fields_for :images do |builder|
+            = render 'albums/images_fields', :f => builder
+          .field
+            = link_to_add_fields '<input type="button" value="ADD Images" name="ADD NEW" class="upload_btn btn btn_skyblue btn_small" style="margin-right: 100px;">'.html_safe, f, :images, 'albums/images_fields'
+    .box-footer
+      %button.btn.btn-primary{:type => "submit"} Submit
+:javascript
+  function add_fields(link, association, content, partials) {
+    var new_id = new Date().getTime();
+    var regexp = new RegExp("new_" + association, "g");
+    $(link).parent().before(content.replace(regexp, new_id));
+    // $(".chosen_select").chosen();
+  }
+
+  function remove_fields(link) {
+    $(link).prev("input[type=hidden]").val("1");
+    $(link).closest(".fields").hide();
+  }

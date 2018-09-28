@@ -1,0 +1,9 @@
+- if current_user.present?
+  %aside.main-sidebar
+    %section.sidebar
+      %ul.sidebar-menu
+        %li.header MAIN NAVIGATION
+        %li
+          %a{:href => albums_path}
+            %i.fa.fa-plane
+            %span Albums

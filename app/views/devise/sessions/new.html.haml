@@ -1,0 +1,28 @@
+.content-wrapper
+  %section.content-header
+    %h1
+      Log in
+  .box.box-default
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .box-body
+        .row
+          .col-md-3
+          .col-md-6
+            .row{style: "margin-left: 30%"}
+              = image_tag("/assets/logo.png", :width => "40%;")
+            .form-group
+              %label{:for => "Email"} Email
+              = f.text_field :email, :class => "form-control",:placeholder => "Enter Email"
+            .form-group
+              %label{:for => "Password"} Password
+              = f.password_field :password, autocomplete: "off", :class => "form-control",:placeholder => "Enter Password"  
+            - if flash[:alert].present?
+              %p.message= flash[:alert]
+            - if flash[:notice].present?
+              %p.message= flash[:notice]
+          .col-md-3
+      .box-footer
+        .row
+          .col-md-3
+          .col-md-6
+            %button.btn.btn-primary{:type => "submit"} Log In

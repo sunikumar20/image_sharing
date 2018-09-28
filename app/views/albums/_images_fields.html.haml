@@ -1,0 +1,16 @@
+.fields
+  .form_group.cf.mbot_20
+    %label.field_label Image:
+    .field
+      .upload_image
+        %span.upload_btn.btn.btn_skyblue.btn_small
+          = f.file_field :pic, onchange: "loadFile(event);"
+          Upload Image
+      .preview_img
+        %img.preimg{:src => f.object.pic.url(:small), style: "height: 100px;width: 100px;"}  
+  .form_group.cf.mbot_20  
+    %label.field_label Tagline:
+    .field
+      = f.text_field :tagline, :class => "textfield"
+
+    = link_to_remove_fields '<input type="button" value="REMOVE" name="remove" class="upload_btn btn btn_red btn_small">'.html_safe, f

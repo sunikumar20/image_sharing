@@ -1,0 +1,11 @@
+= form_tag albums_path, :method => :get do
+  .box-body
+    .row
+      .col-md-6
+        .form-group
+          %label Name
+          = text_field_tag :name, params[:name], :class => "form-control",:placeholder => "Enter name"
+      .col-md-12
+        .form-group
+          .box-footer
+            %button.btn.btn-primary{:type => "submit"} Submit

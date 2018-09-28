@@ -1,0 +1,54 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:charset => "utf-8"}
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}/
+    %meta{:content => "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", :name => "viewport"}
+    %title Image Sharing
+    = javascript_include_tag "jquery", "jquery_ujs", "admin/jquery-ui"
+    = stylesheet_link_tag "admin/bootstrap.min", "admin/font-awesome.min", "admin/ionicons.min", "admin/daterangepicker-bs3", "admin/all", "admin/bootstrap-colorpicker.min", "admin/bootstrap-timepicker.min", "admin/select2.min", "admin/dataTables.bootstrap", "admin/jquery-jvectormap-1.2.2", "admin/bootstrap3-wysihtml5.min", "admin/AdminLTE1.min", "admin/all-skins.min", "admin/admin_custom", "admin/bootstrap-datetimepicker"
+  %body.hold-transition.skin-blue.sidebar-mini.sidebar-collapse
+    .wrapper
+      %header.main-header
+        %a.logo{:href => root_path}
+          %span.logo-mini
+            %b> I
+          %span.logo-lg
+            %b Image Sharing
+        %nav.navbar.navbar-static-top{:role => "navigation"}
+          %a.sidebar-toggle{"data-toggle" => "offcanvas", :href => "#", :role => "button"}
+            %span.sr-only Toggle navigation
+          .navbar-custom-menu
+            %ul.nav.navbar-nav
+              %li.dropdown.user.user-menu
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  %i.fa.fa-user-circle-o
+                  %span.hidden-xs
+                %ul.dropdown-menu
+                  %li.user-header
+                    %i.fa.fa-user-circle-o
+                    %p
+                  %li.user-footer
+                    - if current_user.present?
+                      .pull-left= "Hi #{current_user.name.to_s}"
+                      .pull-right
+                        %a.btn.btn-default.btn-flat{:href => "/users/sign_out"} Sign out
+      = render :partial => "layouts/admin_header"
+      = yield
+      %footer.main-footer
+        %strong
+          Copyright © 2018-2019
+          = succeed "." do
+            %a{:href => "javascript:void(0);"} Image Sharing
+        All rights reserved.
+      .control-sidebar-bg
+    = render :partial => "layouts/adminjs"
+    %script{:src => "https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"}
+    %script{:src => "https://oss.maxcdn.com/respond/1.4.2/respond.min.js"}
+:javascript
+  
+  var loadFile = function(event) {
+    var output = $(event.srcElement).parents(".form_group").find(".preview_img .preimg")[0];
+    output.src = URL.createObjectURL(event.target.files[0]);
+  };

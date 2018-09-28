@@ -1,0 +1,50 @@
+.content-wrapper
+  %section.content-header
+    %h1
+      Albums
+    .breadcrumb
+      %a.btn.btn-sm.btn-primary{:href => new_album_path} Add Albums
+      
+  %section.content
+    .row
+      .col-xs-12
+        .box.box-default.collapsed-box
+          .box-header.with-border
+            %h3.box-title Advanced Search
+            .box-tools.pull-right
+              %button.btn.btn-box-tool{"data-widget" => "collapse"}
+                %i.fa.fa-plus
+          .box-body
+            = render :partial => "albums/search"
+      .col-xs-12
+        .box
+          .box-header
+          .box-body
+            %table#example2.table.table-bordered.table-striped
+              %thead
+                %tr
+                  %th Name
+                  %th Owner
+                  %th Created Date
+                  %th Manage
+              %tbody
+                - @albums.each do |b|
+                  %tr
+                    %td= b.name
+                    %td= b.user.email.to_s
+                    %td= b.cdate
+                    %td
+                      = link_to edit_album_path(b) do
+                        %i.fa.fa-edit
+                      = link_to b, :confirm => 'Are you sure?', :method => :delete do
+                        %i.fa.fa-trash
+                      = link_to album_path(b) do
+                        %i.fa.fa-eye    
+              %tfoot
+                %tr
+                  %th Name
+                  %th Owner
+                  %th Created Date
+                  %th Manage
+            .row.right
+              = paginate @albums if @albums.present?

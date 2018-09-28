@@ -1,0 +1,28 @@
+.content-wrapper
+  %section.content-header
+    %h1
+      Change your password
+  .box.box-default{style: "margin-left: 15px;"}
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+      %p.message= devise_error_messages!
+      = f.hidden_field :reset_password_token
+      .box-body
+        .row
+          .col-md-6
+            .form-group
+              %label{:for => "New password"} New password
+              - if @minimum_password_length
+                %em
+                  (#{@minimum_password_length} characters minimum)
+                %br
+              = f.password_field :password, autofocus: true, autocomplete: "off", :placeholder => "Enter Password", :class => "form-control"
+            .form-group
+              %label{:for => "Confirm new password"} Confirm new password
+              = f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Enter Confirm new password", :class => "form-control"  
+            - if flash[:alert].present?
+              %p.message= flash[:alert]
+            - if flash[:notice].present?
+              %p.message= flash[:notice]  
+              
+      .box-footer
+        %button.btn.btn-primary{:type => "submit"} Change my password
